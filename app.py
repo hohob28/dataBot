@@ -18,6 +18,7 @@ import os
 import sys
 from argparse import ArgumentParser
 from datetime import date
+from apscheduler.schedulers.blocking import BlockingScheduler
 
 from flask import Flask, request, abort
 from linebot import (
@@ -47,8 +48,76 @@ if my_group_id is None:
     print('GROUP_ID as environment variable.')
     sys.exit(1)
 
+#image1 = os.getenv('IMAGE1', None)
+#if image1 is None:
+#    print('IMAGE1 as environment variable.')
+#    sys.exit(1)
+#
+#image2 = os.getenv('IMAGE2', None)
+#if image2 is None:
+#    print('IMAGE2 as environment variable.')
+#    sys.exit(1)
+#
+#image3 = os.getenv('IMAGE3', None)
+#if image3 is None:
+#    print('IMAGE3 as environment variable.')
+#    sys.exit(1)
+#
+#image4 = os.getenv('IMAGE4', None)
+#if image4 is None:
+#    print('IMAGE4 as environment variable.')
+#    sys.exit(1)
+#
+#image5 = os.getenv('IMAGE5', None)
+#if image5 is None:
+#    print('IMAGE5 as environment variable.')
+#    sys.exit(1)
+#
+#image6 = os.getenv('IMAGE6', None)
+#if image6 is None:
+#    print('IMAGE6 as environment variable.')
+#    sys.exit(1)
+#
+#image7 = os.getenv('IMAGE7', None)
+#if image7 is None:
+#    print('IMAGE7 as environment variable.')
+#    sys.exit(1)
+#
+#image8 = os.getenv('IMAGE8', None)
+#if image8 is None:
+#    print('IMAGE8 as environment variable.')
+#    sys.exit(1)
+#
+#image9 = os.getenv('IMAGE9', None)
+#if image9 is None:
+#    print('IMAGE9 as environment variable.')
+#    sys.exit(1)
+
 line_bot_api = LineBotApi(channel_access_token)
 parser = WebhookParser(channel_secret)
+
+# Start the scheduler
+sched = BlockingScheduler()
+#sched.daemonic = False
+sched.start()
+
+# simulate day
+my_date = date.today()
+
+def checkAndSend():
+    try:
+        #I just want my group to receive msg
+#        line_bot_api.push_message(my_group_id, ImageSendMessage(original_content_url='https://image.ibb.co/mjCpra/S_75849824.jpg', preview_image_url='https://image.ibb.co/mjCpra/S_75849824.jpg'))
+        date_string = my_date.strftime('%Y-%m-%d')
+        print(date_string)
+        my_date += datetime.timedelta(days=1)
+    except LineBotApiError as e:
+        abort(400)
+
+    return 'OK'
+
+# Schedules job_function to be run once each minute
+sched.add_job(checkAndSend,  second='5')
 
 @app.route('/')
 def hello():
@@ -71,16 +140,16 @@ def callback():
         abort(400)
 
     # if event is MessageEvent and message is TextMessage, then echo text
-#    for event in events:
-#        if not isinstance(event, MessageEvent):
-#            continue
-#        if not isinstance(event.message, TextMessage):
-#            continue
-#
-#        line_bot_api.reply_message(
-#            event.reply_token,
-#            TextSendMessage(text=event.message.text)
-#        )
+    for event in events:
+        if not isinstance(event, MessageEvent):
+            continue
+        if not isinstance(event.message, TextMessage):
+            continue
+
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=event.message.text)
+        )
 
     return 'OK'
 
@@ -88,7 +157,7 @@ def callback():
 def sendEternity():
     
     today = date.today()
-     = date(2017,7,25)
+    a = date(2017,7,25)
 
     if (today-a).days == 14:
         print('HAPPY')
