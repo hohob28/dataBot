@@ -77,10 +77,10 @@ def callback():
         if not isinstance(event.message, TextMessage):
             continue
 
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=event.message.text)
-        )
+#        line_bot_api.reply_message(
+#            event.reply_token,
+#            TextSendMessage(text=event.message.text)
+#        )
 
     return 'OK'
 
@@ -88,7 +88,7 @@ def callback():
 def sendEternity():
     
     today = date.today()
-    a = date(2017,7,25)
+     = date(2017,7,25)
 
     if (today-a).days == 14:
         print('HAPPY')
