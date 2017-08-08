@@ -41,6 +41,11 @@ if channel_access_token is None:
     print('Specify LINE_CHANNEL_ACCESS_TOKEN as environment variable.')
     sys.exit(1)
 
+my_group_id = os.getenv('GROUP_ID', None)
+if my_group_id is None:
+    print('GROUP_ID as environment variable.')
+    sys.exit(1)
+
 line_bot_api = LineBotApi(channel_access_token)
 parser = WebhookParser(channel_secret)
 
@@ -78,23 +83,24 @@ def callback():
 
     return 'OK'
 
-#@app.route("/sendEternity", methods=['POST'])
-#def sendEternity():
-#
-#
-#    try:
-#        line_bot_api.push_message('<to>', TextSendMessage(text='Hello World!'))
-#    except LineBotApiError as e:
-#        abort(400)
+@app.route("/sendEternity", methods=['POST'])
+def sendEternity():
+
+
+    try:
+        #I just want my group to receive msg
+        line_bot_api.push_message(my_group_id, TextSendMessage(text='Hello World!'))
+    except LineBotApiError as e:
+        abort(400)
 #{
 #    "type": "image",
 #    "originalContentUrl": "https://www.dropbox.com/s/1voyd04049xt6up/S__75849824.jpg",
 #    "previewImageUrl": "https://www.dropbox.com/s/1voyd04049xt6up/S__75849824.jpg"
 #}
-#    
-#
-#
-#    return 'OK'
+    
+
+
+    return 'OK'
 
 
 if __name__ == "__main__":
