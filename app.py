@@ -23,10 +23,10 @@ from linebot import (
     LineBotApi, WebhookParser
 )
 from linebot.exceptions import (
-    InvalidSignatureError
+    InvalidSignatureError, LineBotApiError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
+    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage
 )
 
 app = Flask(__name__)
@@ -55,6 +55,8 @@ def callback():
     # get request body as text
     body = request.get_data(as_text=True)
     app.logger.info("Request body: " + body)
+    
+    print(body)
 
     # parse webhook body
     try:
@@ -75,6 +77,24 @@ def callback():
         )
 
     return 'OK'
+
+#@app.route("/sendEternity", methods=['POST'])
+#def sendEternity():
+#
+#
+#    try:
+#        line_bot_api.push_message('<to>', TextSendMessage(text='Hello World!'))
+#    except LineBotApiError as e:
+#        abort(400)
+#{
+#    "type": "image",
+#    "originalContentUrl": "https://www.dropbox.com/s/1voyd04049xt6up/S__75849824.jpg",
+#    "previewImageUrl": "https://www.dropbox.com/s/1voyd04049xt6up/S__75849824.jpg"
+#}
+#    
+#
+#
+#    return 'OK'
 
 
 if __name__ == "__main__":
