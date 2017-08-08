@@ -17,6 +17,7 @@ from __future__ import unicode_literals
 import os
 import sys
 from argparse import ArgumentParser
+from datetime import date
 
 from flask import Flask, request, abort
 from linebot import (
@@ -26,7 +27,7 @@ from linebot.exceptions import (
     InvalidSignatureError, LineBotApiError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage
+    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, VideoSendMessage
 )
 
 app = Flask(__name__)
@@ -83,22 +84,20 @@ def callback():
 
     return 'OK'
 
-@app.route("/sendEternity", methods=['POST'])
+@app.route("/sendEternity", methods=['POST', 'GET'])
 def sendEternity():
+    
+    today = date.today()
+    a = date(2017,7,25)
 
-
+    if (today-a).days == 14:
+        print('HAPPY')
+    
     try:
         #I just want my group to receive msg
-        line_bot_api.push_message(my_group_id, TextSendMessage(text='Hello World!'))
+        line_bot_api.push_message(my_group_id, ImageSendMessage(original_content_url='https://image.ibb.co/mjCpra/S_75849824.jpg', preview_image_url='https://image.ibb.co/mjCpra/S_75849824.jpg'))
     except LineBotApiError as e:
         abort(400)
-#{
-#    "type": "image",
-#    "originalContentUrl": "https://www.dropbox.com/s/1voyd04049xt6up/S__75849824.jpg",
-#    "previewImageUrl": "https://www.dropbox.com/s/1voyd04049xt6up/S__75849824.jpg"
-#}
-    
-
 
     return 'OK'
 
