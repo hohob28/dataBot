@@ -36,11 +36,9 @@ channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
 channel_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
 if channel_secret is None:
     print('Specify LINE_CHANNEL_SECRET as environment variable.')
-    sys.stdout.flush()
     sys.exit(1)
 if channel_access_token is None:
     print('Specify LINE_CHANNEL_ACCESS_TOKEN as environment variable.')
-    sys.stdout.flush()
     sys.exit(1)
 
 line_bot_api = LineBotApi(channel_access_token)
@@ -87,4 +85,4 @@ if __name__ == "__main__":
     arg_parser.add_argument('-d', '--debug', default=False, help='debug')
     options = arg_parser.parse_args()
 
-    app.run(host='0.0.0.0', debug=options.debug, port=options.port)
+    app.run(debug=options.debug, port=options.port)
