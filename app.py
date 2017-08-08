@@ -71,12 +71,12 @@ def callback():
         abort(400)
 
     # if event is MessageEvent and message is TextMessage, then echo text
-    for event in events:
-        if not isinstance(event, MessageEvent):
-            continue
-        if not isinstance(event.message, TextMessage):
-            continue
-
+#    for event in events:
+#        if not isinstance(event, MessageEvent):
+#            continue
+#        if not isinstance(event.message, TextMessage):
+#            continue
+#
 #        line_bot_api.reply_message(
 #            event.reply_token,
 #            TextSendMessage(text=event.message.text)
