@@ -122,47 +122,47 @@ def checkAndSend():
     text_msg = date_string + ':無'
     
     s = date(2017,7,25)
-    if (today-s).days % 14 == 0:
+    if (my_date-s).days % 14 == 0:
         image_link = IMAGE1
         text_msg = date_string + ':齊天大聖'
     
     s = date(2017,7,27)
-    if (today-s).days % 14 == 0:
+    if (my_date-s).days % 14 == 0:
         image_link = IMAGE2
         text_msg = date_string + ':深x魔王(大屁股)'
     
     s = date(2017,7,29)
-    if (today-s).days % 14 == 0:
+    if (my_date-s).days % 14 == 0:
         image_link = IMAGE3
         text_msg = date_string + ':毒女人'
     
     s = date(2017,7,30)
-    if (today-s).days % 14 == 0:
+    if (my_date-s).days % 14 == 0:
         image_link = IMAGE4
         text_msg = date_string + ':吸血鬼'
 
     s = date(2017,7,31)
-    if (today-s).days % 14 == 0:
+    if (my_date-s).days % 14 == 0:
         image_link = IMAGE15
         text_msg = date_string + ':大地之斧'
 
     s = date(2017,8,2)
-    if (today-s).days % 14 == 0:
+    if (my_date-s).days % 14 == 0:
         image_link = IMAGE6
         text_msg = date_string + ':生化狂魔'
 
     s = date(2017,8,4)
-    if (today-s).days % 14 == 0:
+    if (my_date-s).days % 14 == 0:
         image_link = IMAGE7
         text_msg = date_string + ':無畏騎士'
 
     s = date(2017,8,5)
-    if (today-s).days % 14 == 0:
+    if (my_date-s).days % 14 == 0:
         image_link = IMAGE8
         text_msg = date_string + ':聖靈守護'
 
     s = date(2017,8,6)
-    if (today-s).days % 14 == 0:
+    if (my_date-s).days % 14 == 0:
         image_link = IMAGE9
         text_msg = date_string + ':魔像'
 
