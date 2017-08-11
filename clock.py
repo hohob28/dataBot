@@ -107,7 +107,7 @@ parser = WebhookParser(channel_secret)
 
 # simulate day
 
-my_date = date.today()
+
 
 # Start the scheduler
 sched = BlockingScheduler()
@@ -124,7 +124,10 @@ def checkAndSend():
         abort(400)
     global my_date
     my_date += datetime.timedelta(days=1)
-    
+
+
+my_date = date.today()
+
 #@sched.scheduled_job('cron', day_of_week='mon-fri', hour=10)
 #def scheduled_job():
 #    print('This job is run every weekday at 10am.')
