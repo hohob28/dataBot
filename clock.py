@@ -1,7 +1,8 @@
 import os
 import sys
+import datetime
 from argparse import ArgumentParser
-from datetime import date, datetime
+from datetime import date
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 
