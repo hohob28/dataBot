@@ -106,7 +106,7 @@ parser = WebhookParser(channel_secret)
 #sched.add_job(checkAndSend,  second='5')
 
 # simulate day
-global my_date
+
 my_date = date.today()
 
 # Start the scheduler
@@ -122,6 +122,7 @@ def checkAndSend():
         line_bot_api.push_message(my_group_id, ImageSendMessage(original_content_url='https://image.ibb.co/mjCpra/S_75849824.jpg', preview_image_url='https://image.ibb.co/mjCpra/S_75849824.jpg'))
     except LineBotApiError as e:
         abort(400)
+    global my_date
     my_date += datetime.timedelta(days=1)
     
 #@sched.scheduled_job('cron', day_of_week='mon-fri', hour=10)
