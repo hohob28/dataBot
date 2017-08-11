@@ -1,7 +1,7 @@
 import os
 import sys
 from argparse import ArgumentParser
-from datetime import date
+from datetime import date, datetime
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 
@@ -120,7 +120,7 @@ def checkAndSend():
         #I just want my group to receive msg
         
         line_bot_api.push_message(my_group_id, TextSendMessage(text=date_string))
-        line_bot_api.push_message(my_group_id, ImageSendMessage(original_content_url='https://image.ibb.co/mjCpra/S_75849824.jpg', preview_image_url='https://image.ibb.co/mjCpra/S_75849824.jpg'))
+#        line_bot_api.push_message(my_group_id, ImageSendMessage(original_content_url='https://image.ibb.co/mjCpra/S_75849824.jpg', preview_image_url='https://image.ibb.co/mjCpra/S_75849824.jpg'))
     except LineBotApiError as e:
         abort(400)
     my_date += datetime.timedelta(days=1)
