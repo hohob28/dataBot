@@ -96,28 +96,38 @@ if my_group_id is None:
 line_bot_api = LineBotApi(channel_access_token)
 parser = WebhookParser(channel_secret)
 
-# Start the scheduler
-sched = BlockingScheduler()
-#sched.daemonic = False
-sched.start()
 
-# simulate day
-my_date = date.today()
 
-def checkAndSend():
-    try:
-        #I just want my group to receive msg
-#        line_bot_api.push_message(my_group_id, ImageSendMessage(original_content_url='https://image.ibb.co/mjCpra/S_75849824.jpg', preview_image_url='https://image.ibb.co/mjCpra/S_75849824.jpg'))
-        date_string = my_date.strftime('%Y-%m-%d')
-        print(date_string)
-        my_date += datetime.timedelta(days=1)
-    except LineBotApiError as e:
-        abort(400)
+## simulate day
+#my_date = date.today()
+#
+## Start the scheduler
+#sched = BlockingScheduler()
+#@sched.scheduled_job('interval', seconds=1)
+#def timed_job():
+#    print('This job is run every 1 seconds.')
+#
+##@sched.scheduled_job('cron', day_of_week='mon-fri', hour=10)
+##def scheduled_job():
+##    print('This job is run every weekday at 10am.')
+#
+##sched.configure(options_from_ini_file)
+#sched.start()
 
-    return 'OK'
-
-# Schedules job_function to be run once each minute
-sched.add_job(checkAndSend,  second='5')
+#def checkAndSend():
+#    try:
+#        #I just want my group to receive msg
+##        line_bot_api.push_message(my_group_id, ImageSendMessage(original_content_url='https://image.ibb.co/mjCpra/S_75849824.jpg', preview_image_url='https://image.ibb.co/mjCpra/S_75849824.jpg'))
+#        date_string = my_date.strftime('%Y-%m-%d')
+#        print(date_string)
+#        my_date += datetime.timedelta(days=1)
+#    except LineBotApiError as e:
+#        abort(400)
+#
+#    return 'OK'
+#
+## Schedules job_function to be run once each minute
+#sched.add_job(checkAndSend,  second='5')
 
 @app.route('/')
 def hello():
@@ -164,6 +174,7 @@ def sendEternity():
     
     try:
         #I just want my group to receive msg
+#        line_bot_api.push_message(my_group_id, TextSendMessage(text='900分是啥?'))
         line_bot_api.push_message(my_group_id, ImageSendMessage(original_content_url='https://image.ibb.co/mjCpra/S_75849824.jpg', preview_image_url='https://image.ibb.co/mjCpra/S_75849824.jpg'))
     except LineBotApiError as e:
         abort(400)
