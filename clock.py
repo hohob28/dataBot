@@ -118,6 +118,7 @@ def checkAndSend():
 #        print(date_string)
         line_bot_api.push_message(my_group_id, TextSendMessage(text=date_string))
         line_bot_api.push_message(my_group_id, ImageSendMessage(original_content_url='https://image.ibb.co/mjCpra/S_75849824.jpg', preview_image_url='https://image.ibb.co/mjCpra/S_75849824.jpg'))
+        global my_date
         my_date += datetime.timedelta(days=1)
     except LineBotApiError as e:
         abort(400)
