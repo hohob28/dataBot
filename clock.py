@@ -82,30 +82,6 @@ if image9 is None:
 line_bot_api = LineBotApi(channel_access_token)
 parser = WebhookParser(channel_secret)
 
-
-
-## simulate day
-#my_date = date.today()
-#
-## Start the scheduler
-#sched = BlockingScheduler()
-#@sched.scheduled_job('interval', seconds=1)
-#def timed_job():
-#    print('This job is run every 1 seconds.')
-#
-##@sched.scheduled_job('cron', day_of_week='mon-fri', hour=10)
-##def scheduled_job():
-##    print('This job is run every weekday at 10am.')
-#
-##sched.configure(options_from_ini_file)
-#sched.start()
-
-
-
-
-## Schedules job_function to be run once each minute
-#sched.add_job(checkAndSend,  second='5')
-
 # simulate day
 my_date = date.today()
 
@@ -113,8 +89,7 @@ my_date = date.today()
 # Start the scheduler
 sched = BlockingScheduler()
 sched.configure(timezone=timezone('Asia/Hong_Kong'))
-#@sched.scheduled_job('interval', seconds=10)
-@sched.scheduled_job('cron', day_of_week='mon-fri', hour=18, minute=10)
+@sched.scheduled_job('cron', hour=5)
 def checkAndSend():
     global my_date
     date_string = my_date.strftime('%Y-%m-%d')
@@ -181,11 +156,5 @@ def checkAndSend():
 
 
 
-
-#@sched.scheduled_job('cron', day_of_week='mon-fri', hour=10)
-#def scheduled_job():
-#    print('This job is run every weekday at 10am.')
-
-#sched.configure(options_from_ini_file)
 sched.start()
 
