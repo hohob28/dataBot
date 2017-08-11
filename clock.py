@@ -106,6 +106,7 @@ parser = WebhookParser(channel_secret)
 #sched.add_job(checkAndSend,  second='5')
 
 # simulate day
+global my_date
 my_date = date.today()
 
 # Start the scheduler
