@@ -1,4 +1,5 @@
 from apscheduler.schedulers.blocking import BlockingScheduler
+from datetime import date
 
 # simulate day
 my_date = date.today()
