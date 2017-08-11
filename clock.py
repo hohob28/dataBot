@@ -120,12 +120,11 @@ def checkAndSend():
         line_bot_api.push_message(my_group_id, ImageSendMessage(original_content_url='https://image.ibb.co/mjCpra/S_75849824.jpg', preview_image_url='https://image.ibb.co/mjCpra/S_75849824.jpg'))
         my_date += datetime.timedelta(days=1)
     except LineBotApiError as e:
-
+        abort(400)
 #@sched.scheduled_job('cron', day_of_week='mon-fri', hour=10)
 #def scheduled_job():
 #    print('This job is run every weekday at 10am.')
 
 #sched.configure(options_from_ini_file)
-if __name__ == "__main__":
-    sched.start()
+sched.start()
 
