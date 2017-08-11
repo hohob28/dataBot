@@ -4,7 +4,7 @@ import datetime
 from argparse import ArgumentParser
 from datetime import date
 from apscheduler.schedulers.blocking import BlockingScheduler
-
+from pytz import timezone
 
 from flask import Flask, request, abort
 from linebot import (
@@ -112,7 +112,9 @@ my_date = date.today()
 
 # Start the scheduler
 sched = BlockingScheduler()
-@sched.scheduled_job('interval', seconds=10)
+sched.configure(timezone=timezone('Asia/Hong_Kong'))
+#@sched.scheduled_job('interval', seconds=10)
+@sched.scheduled_job('cron', day_of_week='mon-fri', hour=18, minute=10)
 def checkAndSend():
     global my_date
     date_string = my_date.strftime('%Y-%m-%d')
@@ -124,51 +126,53 @@ def checkAndSend():
     s = date(2017,7,25)
     if (my_date-s).days % 14 == 0:
         image_link = image1
-        text_msg = date_string + ':齊天大聖'
+        text_msg = date_string + '要打齊天大聖囉'
     
     s = date(2017,7,27)
     if (my_date-s).days % 14 == 0:
         image_link = image2
-        text_msg = date_string + ':深x魔王(大屁股)'
+        text_msg = date_string + ':要打深x魔王(大屁股)囉'
     
     s = date(2017,7,29)
     if (my_date-s).days % 14 == 0:
         image_link = image3
-        text_msg = date_string + ':毒女人'
+        text_msg = date_string + ':要打毒女人囉'
     
     s = date(2017,7,30)
     if (my_date-s).days % 14 == 0:
         image_link = image4
-        text_msg = date_string + ':吸血鬼'
+        text_msg = date_string + ':要打吸血鬼囉'
 
     s = date(2017,7,31)
     if (my_date-s).days % 14 == 0:
         image_link = image5
-        text_msg = date_string + ':大地之斧'
+        text_msg = date_string + ':要打大地之斧囉'
 
     s = date(2017,8,2)
     if (my_date-s).days % 14 == 0:
         image_link = image6
-        text_msg = date_string + ':生化狂魔'
+        text_msg = date_string + ':要打生化狂魔囉'
 
     s = date(2017,8,4)
     if (my_date-s).days % 14 == 0:
         image_link = image7
-        text_msg = date_string + ':無畏騎士'
+        text_msg = date_string + ':要打無畏騎士囉'
 
     s = date(2017,8,5)
     if (my_date-s).days % 14 == 0:
         image_link = image8
-        text_msg = date_string + ':聖靈守護'
+        text_msg = date_string + ':要打聖靈守護囉'
 
     s = date(2017,8,6)
     if (my_date-s).days % 14 == 0:
         image_link = image9
-        text_msg = date_string + ':魔像'
+        text_msg = date_string + ':要打魔像囉'
+    
+    msg_to_send = '各位早安，今天是'+text_msg
 
     try:
         #I just want my group to receive msg
-        line_bot_api.push_message(my_group_id, TextSendMessage(text=text_msg))
+        line_bot_api.push_message(my_group_id, TextSendMessage(text=msg_to_send))
         if image_link is not None:
             line_bot_api.push_message(my_group_id, ImageSendMessage(original_content_url=image_link, preview_image_url=image_link))
     except LineBotApiError as e:
