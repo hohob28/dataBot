@@ -166,11 +166,11 @@ def callback():
 @app.route("/sendEternity", methods=['POST', 'GET'])
 def sendEternity():
     
-    today = date.today()
-    a = date(2017,7,25)
-
-    if (today-a).days == 14:
-        print('HAPPY')
+#    today = date.today()
+#    a = date(2017,7,25)
+#
+#    if (today-a).days == 14:
+#        print('HAPPY')
     
     try:
         #I just want my group to receive msg
