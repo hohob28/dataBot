@@ -126,5 +126,6 @@ def checkAndSend():
 #    print('This job is run every weekday at 10am.')
 
 #sched.configure(options_from_ini_file)
-sched.start()
+if __name__ == "__main__":
+    sched.start()
 
