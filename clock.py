@@ -106,13 +106,14 @@ parser = WebhookParser(channel_secret)
 #sched.add_job(checkAndSend,  second='5')
 
 # simulate day
-
+my_date = date.today()
 
 
 # Start the scheduler
 sched = BlockingScheduler()
 @sched.scheduled_job('interval', seconds=5)
 def checkAndSend():
+    global my_date
     date_string = my_date.strftime('%Y-%m-%d')
     print(date_string)
     try:
@@ -122,11 +123,10 @@ def checkAndSend():
         line_bot_api.push_message(my_group_id, ImageSendMessage(original_content_url='https://image.ibb.co/mjCpra/S_75849824.jpg', preview_image_url='https://image.ibb.co/mjCpra/S_75849824.jpg'))
     except LineBotApiError as e:
         abort(400)
-    global my_date
     my_date += datetime.timedelta(days=1)
 
 
-my_date = date.today()
+
 
 #@sched.scheduled_job('cron', day_of_week='mon-fri', hour=10)
 #def scheduled_job():
